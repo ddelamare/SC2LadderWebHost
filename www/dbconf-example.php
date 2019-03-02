@@ -1,9 +1,9 @@
 <?php
 //DATABASE CONNECTION VARIABLES
-$host = "localhost"; // Host name
+$host = "localhost"; // Host name. Use "db" for docker setups as it should resolve to the database container
 $username = "root"; // Mysql username
 $password = ""; // Mysql password
-$db_name = "eloimport"; // Database name
+$db_name = "sc2ladder"; // Database name
 
 //DO NOT CHANGE BELOW THIS LINE UNLESS YOU CHANGE THE NAMES OF THE MEMBERS AND LOGINATTEMPTS TABLES
 

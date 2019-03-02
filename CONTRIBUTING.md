@@ -8,7 +8,7 @@ The docker-compose.yml file will build the PHP image and create a Mysql database
 
 docker-compose.yml creates two containers and links them under the same network. 
   - The first container contains PHP with Apache. The files from the /www directory are copied into apache's default directory. The port 80 on the container is mapped to port 8000 on your computer (host)
-  - The second container is a MySql 5.7 host from Docker Hub. The database files created are mapped to /sqldata, so that your database changes are persisted. Port 3306 (default mysql port) is mapped to 3306 on your host
+  - The second container is a MySql 5.7 host from Docker Hub. The database files created are stored in a named docker volume, so that your database changes are persisted. Port 3306 (default mysql port) is mapped to 3306 on your host
 
 ### Steps:
 
@@ -20,4 +20,5 @@ docker-compose.yml creates two containers and links them under the same network.
     - Port: 3306 (To change the port mapping change the first port for the mysql container in docker-compose.yml)
     - Username: root
     - Password: root (change in the docker-compose.yml if you want extra security)
+6. Copy the ./www/dbconf-example.php file to ./www/dbconf.php and update any required connection details.
 6. Navigate to [http://localhost:8000](http://localhost:8000) and you should see a working site. Changes are synced in real-time as you update files.

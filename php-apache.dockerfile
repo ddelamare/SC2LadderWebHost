@@ -11,7 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
             libfreetype6-dev \
             libjpeg62-turbo-dev \
             libmcrypt-dev \
-            libpng12-dev \
+            libpng-dev \
             libcurl4-nss-dev \
         && docker-php-ext-install iconv mcrypt \
         && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -24,6 +24,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
 
 # Make sure the www-data permissions work
 RUN groupmod -g 1000 www-data
+
+# For PHP debugging
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install Tidy
 RUN apt-get -y install libtidy-dev \
